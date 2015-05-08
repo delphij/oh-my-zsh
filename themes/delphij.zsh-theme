@@ -17,5 +17,8 @@ vcs_status() {
     fi
 }
 
+bindkey "$terminfo[kcuu1]"  history-beginning-search-backward
+bindkey "$terminfo[kcud1]"  history-beginning-search-forward
+
 local ret_status="%(?:[%B%n@%m%b] %B%~%b:%{$fg_bold[red]%}➜ %s)"
 PROMPT='${ret_status}%{$fg_bold[blue]%}$(vcs_status)%{$fg_bold[blue]%}%{$reset_color%}%(!.#.>) '
