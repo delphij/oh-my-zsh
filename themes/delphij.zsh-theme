@@ -17,8 +17,10 @@ vcs_status() {
     fi
 }
 
-bindkey "$terminfo[kcuu1]"  history-beginning-search-backward
-bindkey "$terminfo[kcud1]"  history-beginning-search-forward
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey '$terminfo[kcuu1]' history-beginning-search-backward-end
+bindkey '$terminfo[kcud1]' history-beginning-search-forward-end
 
 zstyle ':completion:*' completer _complete _correct _approximate
 
