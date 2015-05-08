@@ -20,5 +20,7 @@ vcs_status() {
 bindkey "$terminfo[kcuu1]"  history-beginning-search-backward
 bindkey "$terminfo[kcud1]"  history-beginning-search-forward
 
+zstyle ':completion:*' completer _complete _correct _approximate
+
 local ret_status="%(?:[%B%n@%m%b] %B%~%b:%{$fg_bold[red]%}➜ %s)"
 PROMPT='${ret_status}%{$fg_bold[blue]%}$(vcs_status)%{$fg_bold[blue]%}%{$reset_color%}%(!.#.>) '
