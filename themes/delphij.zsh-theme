@@ -24,5 +24,8 @@ source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zs
 
 zstyle ':completion:*' completer _complete _correct _approximate
 
+# Don't ask when doing rm *
+setopt rm_star_wait
+
 local ret_status="%(?:[%B%n@%m%b] %B%~%b:%{$fg_bold[red]%}➜ %s)"
 PROMPT='${ret_status}%{$fg_bold[blue]%}$(vcs_status)%{$fg_bold[blue]%}%{$reset_color%}%(!.#.>) '
