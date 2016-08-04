@@ -23,6 +23,8 @@ if which tmux &> /dev/null
 	[[ -n "$ZSH_TMUX_AUTOCONNECT" ]] || ZSH_TMUX_AUTOCONNECT=true
 	# Automatically close the terminal when tmux exits
 	[[ -n "$ZSH_TMUX_AUTOQUIT" ]] || ZSH_TMUX_AUTOQUIT=$ZSH_TMUX_AUTOSTART
+	# Automatically pick up tmux environments
+	[[ -n "$ZSH_TMUX_AUTOREFRESH" ]] || ZSH_TMUX_AUTOREFRESH=true
 	# Set term to screen or screen-256color based on current terminal support
 	[[ -n "$ZSH_TMUX_FIXTERM" ]] || ZSH_TMUX_FIXTERM=true
 	# Set '-CC' option for iTerm2 tmux integration
@@ -77,6 +79,12 @@ if which tmux &> /dev/null
 		fi
 	}
 
+	# Refresh tmux environment variables.
+	function _zsh_tmux_plugin_preexec()
+	{
+		eval $(tmux show-environment -s)
+	}
+
 	# Use the completions for tmux for our function
 	compdef _tmux _zsh_tmux_plugin_run
 
@@ -92,6 +100,13 @@ if which tmux &> /dev/null
 			export ZSH_TMUX_AUTOSTARTED=true
 			_zsh_tmux_plugin_run
 		fi
+	fi
+
+	# Automatically refresh tmux environments if tmux is running.
+	if [[ -n "$TMUX" && "$ZSH_TMUX_AUTOREFRESH" == "true" ]]
+	then
+		autoload -U add-zsh-hook
+		add-zsh-hook preexec _zsh_tmux_plugin_preexec
 	fi
 else
 	print "zsh tmux plugin: tmux not found. Please install tmux before using this plugin."
