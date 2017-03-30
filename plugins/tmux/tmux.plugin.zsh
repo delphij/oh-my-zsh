@@ -80,7 +80,7 @@ if which tmux &> /dev/null
 	}
 
 	# Refresh tmux environment variables.
-	function _zsh_tmux_plugin_precmd()
+	function _zsh_tmux_plugin_preexec()
 	{
 		eval $(tmux show-environment -s)
 	}
@@ -106,7 +106,7 @@ if which tmux &> /dev/null
 	if [[ -n "$TMUX" && "$ZSH_TMUX_AUTOREFRESH" == "true" ]]
 	then
 		autoload -U add-zsh-hook
-		add-zsh-hook precmd _zsh_tmux_plugin_precmd
+		add-zsh-hook preexec _zsh_tmux_plugin_preexec
 	fi
 else
 	print "zsh tmux plugin: tmux not found. Please install tmux before using this plugin."
