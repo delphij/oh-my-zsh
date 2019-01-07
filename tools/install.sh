@@ -24,7 +24,7 @@ main() {
   # which may fail on systems lacking tput or terminfo
   set -e
 
-  if command -v zsh >/dev/null 2>&1; then
+  if ! command -v zsh >/dev/null 2>&1; then
     printf "${YELLOW}Zsh is not installed!${NORMAL} Please install zsh first!\n"
     exit
   fi
@@ -72,9 +72,9 @@ main() {
   fi
 
   printf "${BLUE}Using the Oh My Zsh template file and adding it to ~/.zshrc${NORMAL}\n"
-  cp $ZSH/templates/zshrc.zsh-template ~/.zshrc
+  cp "$ZSH"/templates/zshrc.zsh-template ~/.zshrc
   sed "/^export ZSH=/ c\\
-  export ZSH=$ZSH
+  export ZSH=\"$ZSH\"
   " ~/.zshrc > ~/.zshrc-omztemp
   mv -f ~/.zshrc-omztemp ~/.zshrc
 
@@ -108,7 +108,7 @@ main() {
   echo 'p.p.s. Get stickers and t-shirts at https://shop.planetargon.com.'
   echo ''
   printf "${NORMAL}"
-  env zsh
+  env zsh -l
 }
 
 main
