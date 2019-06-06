@@ -13,6 +13,9 @@ fi
 # This command is used a LOT both below and in daily life
 alias k=kubectl
 
+# Execute a kubectl command against all namespaces
+alias kca='f(){ kubectl "$@" --all-namespaces;  unset -f f; }; f'
+
 # Apply a YML file
 alias kaf='kubectl apply -f'
 
@@ -24,6 +27,9 @@ alias kcuc='kubectl config use-context'
 alias kcsc='kubectl config set-context'
 alias kcdc='kubectl config delete-context'
 alias kccc='kubectl config current-context'
+
+# List all contexts
+alias kcgc='kubectl config get-contexts'
 
 # General aliases
 alias kdel='kubectl delete'
@@ -59,6 +65,7 @@ alias kgns='kubectl get namespaces'
 alias kens='kubectl edit namespace'
 alias kdns='kubectl describe namespace'
 alias kdelns='kubectl delete namespace'
+alias kcn='kubectl config set-context $(kubectl config current-context) --namespace'
 
 # ConfigMap management
 alias kgcm='kubectl get configmaps'
@@ -80,6 +87,9 @@ alias kdd='kubectl describe deployment'
 alias kdeld='kubectl delete deployment'
 alias ksd='kubectl scale deployment'
 alias krsd='kubectl rollout status deployment'
+kres(){
+    kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
+}
 
 # Rollout management.
 alias kgrs='kubectl get rs'
