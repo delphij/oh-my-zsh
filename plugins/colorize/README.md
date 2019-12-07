@@ -11,6 +11,12 @@ To use it, add colorize to the plugins array of your zshrc file:
 plugins=(... colorize)
 ```
 
+## Styles
+
+Pygments offers multiple styles. By default, the `default` style is used, but you can choose another theme by setting the `ZSH_COLORIZE_STYLE` environment variable:
+
+`ZSH_COLORIZE_STYLE="colorful"`
+
 ## Usage
 
 * `ccat  <file> [files]`: colorize the contents of the file (or files, if more than one are provided). 
@@ -26,4 +32,4 @@ In the latter form, the file contents will be concatenated and presented by less
 
 ## Requirements
 
-You have to install Pygments first: [pygments.org](http://pygments.org/download/)
+You have to install Pygments first: [pygments.org](http://pygments.org/download.html)
