@@ -37,6 +37,8 @@ plugins=(... vi-mode)
 - `INSERT_MODE_INDICATOR`: controls the string displayed when the shell is in insert mode.
   See [Mode indicators](#mode-indicators) for details.
 
+- `VI_MODE_DISABLE_CLIPBOARD`: If set, disables clipboard integration on yank/paste
+
 ## Mode indicators
 
 *Normal mode* is indicated with a red `<<<` mark at the right prompt, when it
@@ -53,7 +55,7 @@ INSERT_MODE_INDICATOR="%F{yellow}+%f"
 
 ### Adding mode indicators to your prompt
 
-`Vi-mode` by default will add mode indicators to `RPROMPT` **unless** that is defined by 
+`Vi-mode` by default will add mode indicators to `RPROMPT` **unless** that is defined by
 a preceding plugin.
 
 If `PROMPT` or `RPROMPT` is not defined to your liking, you can add mode info manually. The `vi_mode_prompt_info` function is available to insert mode indicator information.
